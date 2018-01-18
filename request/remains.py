@@ -1,15 +1,14 @@
-from ..config.load import load_param
 from time import sleep
 
 
-def ticket_remain(driver):
+def ticket_remain(driver, params):
     """
         车票余量查询
     :param driver:
+    :param params:
     :return:
     """
     print("购票页面开始...")
-    params = load_param("..\\data\\request.ini")
     driver.visit(params['ticket_url'])
     # 加载查询信息
     # 出发地

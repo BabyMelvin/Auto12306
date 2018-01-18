@@ -1,13 +1,10 @@
-from ..config.load import load_param
 
 count = [0]
-count[0] = 0
 
 
-def login(driver):
-    print("开始登录,第{0}次...", count[0] + 1)
+def login(driver, params):
     global count
-    params = load_param("..\\data\\self.ini")
+    print("开始登录,第{0}次...", count[0] + 1)
     driver.visit(params['login_url'])
     # 自动填充用户名
     driver.fill("loginUserDTO.user_name", params['username'])

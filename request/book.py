@@ -1,9 +1,13 @@
 import time
-from ..config.load import load_param
 
 
-def submit_book(driver):
-    params = load_param("..\\data\\request.ini")
+def submit_book(driver, params):
+    """
+    提交用户订单
+    :param driver:
+    :param params:
+    :return:
+    """
     try:
         start = time.clock()
         # 选择用户

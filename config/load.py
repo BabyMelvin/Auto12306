@@ -1,6 +1,8 @@
 from configparser import ConfigParser
 import sys
 import platform
+import codecs
+import os
 
 
 def load_param(file):
@@ -13,9 +15,12 @@ def load_param(file):
     """
     config_parser = ConfigParser()
     config_file = get_path(file)
-    print("加载配置文件:" + config_file)
+    print(os.getcwd())
+    path = os.path.join(os.getcwd(), config_file)
+    print("加载配置文件:" + path)
     try:
-        config_parser.read(config_file, encoding="utf-8-sig")
+        raw_file = codecs.open(path, 'r', encoding="utf-8-sig")
+        config_parser.readfp(raw_file)
     except IOError:
         print("打开配置文件:{0}失败!!!", format(config_file))
         input("Press any key to continue")
@@ -45,12 +50,12 @@ def get_separator():
 
 def is_need_transfer(file):
     if 'Window' in platform.system():
-        if file.contains("\\"):
+        if "\\" in file:
             return False, '\\'
         else:
             return True, '/'
     else:
-        if file.contains("\\"):
+        if "\\" in file:
             return True, '/'
         else:
             return False, '\\'
@@ -61,5 +66,5 @@ def get_path(file):
     if not is_need:
         return file
     file_str = file.split(separator)
-    file_str = file_str.join(get_separator())
+    file_str = get_separator().join(file_str)
     return file_str
