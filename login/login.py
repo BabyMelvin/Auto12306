@@ -1,3 +1,4 @@
+from time import sleep
 
 count = [0]
 
@@ -16,7 +17,8 @@ def login(driver, params):
     count[0] += 1
     if driver.url != params['initmy_url']:
         if count[0] < 5:
-            login(driver)
+            sleep(0.8)
+            login(driver, params)
         else:
             print("自动登录超过5次，失败")
             return False
